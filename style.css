@@ -28,20 +28,26 @@ main {
 
 header {
   display: flex;
+  justify-content: space-between;
   position: fixed;
   align-items: center;
-  mix-blend-mode: difference;
-  z-index: 1000;
+  z-index: 100;
+  top: 0;
   padding: 0 2vw;
   width: 100%;
   height: 85px;
+  background-color: #fff;
+}
+
+#close-content {
+  display: none;
+  cursor: pointer;
 }
 
 #grid-container {
   display: grid;
   grid-auto-flow: column;
   position: relative;
-  z-index: 1;
   width: 100%;
   gap: 10px;
   padding: 85px 1.5vw;
@@ -61,9 +67,58 @@ header {
   margin-bottom: 1rem;
 }
 
-img {
+.post img {
   width: 100%;
   height: fit-content;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+#content-container {
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  height: 100vh;
+  background-color: aliceblue;
+  transition: all 0.5s ease-in-out;
+}
+
+.translatePositive {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.translateNormal {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.translateNegative {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.content-wrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 100vh;
+  padding: 85px 1.5vw 0;
+}
+
+.content-image-galery {
+  display: flex;
+  position: relative;
+  width: fit-content;
+  height: 85%;
+}
+
+.content-infos {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: left;
+  justify-content: end;
+  height: 15%;
 }
