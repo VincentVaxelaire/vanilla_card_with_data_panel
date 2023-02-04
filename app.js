@@ -16,13 +16,36 @@ window.addEventListener('resize', () => {
 });
 generateGrid(4, POSTS);
 
-// quand on clique sur un post, ça créé une div avec le contenu du post
-const POSTS_CONTAINER = document.getElementById('grid-container');
-POSTS_CONTAINER.addEventListener('click', (e) => {
-    const POST = e.target.closest('.post');
-    if (POST) {
-        const POST_INDEX = [...POSTS_CONTAINER.children].indexOf(POST.parentElement);
-        generateContent(POSTS[POST_INDEX]);
-    }
+// Add event listener to each post
+const POSTS_LIST = document.querySelectorAll('.post');
+const CONTENT_CONTAINER = document.getElementById('content-container');
+const CLOSE_BUTTON = document.getElementById('close-content');
+POSTS_LIST.forEach((post) => {
+    post.addEventListener('click', (e) => {
+        // block overflow
+        // const main = document.querySelector('main');
+        // main.style.overflow = 'hidden';
+
+        // show close button
+        CLOSE_BUTTON.style.display = 'block';
+
+        // translate content container
+        CONTENT_CONTAINER.classList.replace('translatePositive', 'translateNormal')
+        
+        // get current post
+        const currentPost = POSTS.find((post) => post.title === e.target.closest('.post').querySelector('.post-title').textContent);
+        generateContent(currentPost);
+    });
 });
 
+CLOSE_BUTTON.addEventListener('click', () => {
+    // hide close button
+    CLOSE_BUTTON.style.display = 'none';
+
+    // translate content container
+    CONTENT_CONTAINER.classList.replace('translateNormal', 'translateNegative')
+
+    setTimeout(() => {
+        CONTENT_CONTAINER.classList.replace('translateNegative', 'translatePositive')
+    }, 500);
+});
